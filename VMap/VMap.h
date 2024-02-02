@@ -1,46 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <optional>
 #include <vector>
-
-/*
-Implemented using a binary search tree, which consists of a nodes and left and right child nodes, where each node consists of
-its key, value and children nodes. In a binary search tree, the left child node is always less than its direct parent,
-while the right child is always greater than the direct parent node. This comparison is done automatically for each type.
-This is an example tree:
-            5
-          /   \
-         4     9
-       /
-      7
-If we want to append the number 6, we see 6 is > start node so must go to the right branch,
-but then that node is < than that right child node, so the new key goes to the left of that node
-           5
-         /   \
-        4     9
-      /      /
-     2      6
-
-If we were to remove a key, for instance 4, the new tree would be:
-
-
-Note: In my implementations of these functions I traverse the tree in different ways - some with recursion (in-order traveral) and some iteratively 
-Most helper functions are for implementations that require recursion
-
-Features:
-put - add entry to map
-get - retrieve value from key
-getKey - retrieves first instance of key with specified value
-remove - removes key from map
-getKeySet - returns std::vector of keys
-getValueSet - returns std::vector of values
-isEmpty - is the map empty
-size - size of map
-clear - removes all entries of the map
-printTree - visualize the binary search tree created with the keys (work in progress)
-<< - print operator overload for displaying map
-*/
 
 //Template so that we can make this a generic class 
 template <typename K, typename V>
@@ -64,7 +25,7 @@ private:
     Node* root;
     int _size;
 
-    //For printing out the map
+    //Helper for printing out the map
     void printInOrderHelper(std::ostream& os, Node* node) const {
         //Base case - if it is empty do nothing
         if (!node) return;
@@ -74,6 +35,7 @@ private:
         printInOrderHelper(os, node->right);
     }
 
+    //Helper for BST visualizer
     void printTreeHelper(Node* node, int depth) const {
         if (!node) return;
         //Print right subtree first (with increased depth)
@@ -99,6 +61,7 @@ private:
         getValueSetHelper(node->right, values);
     }
 
+    //Helper for getting key by value
     void getKeyHelper(Node* node, V value, std::vector<K>& keys) const {
         if (!node) return;
         getKeyHelper(node->left, value, keys); //Traverse left subtree
@@ -110,6 +73,7 @@ private:
         getKeyHelper(node->right, value, keys);
     }
 
+    //Helper for clearing map
     void clearHelper(Node* node) {
         if (!node) return;
         clearHelper(node->left);
@@ -164,6 +128,7 @@ public:
     V* get(K key) {
         Node* current = root;
         //Traverse binary tree
+
         while (current) {
             //Attempt to locate the key
             if (key < current->key)
@@ -194,6 +159,7 @@ public:
     void remove(K key) {
         Node* parent = nullptr;
         Node* current = root;
+        //Locate item to remove
         while (current != nullptr && current->key != key) {
             parent = current;
             if (key < current->key) current = current->left;
@@ -228,7 +194,7 @@ public:
             replacement = current->left ? current->left : current->right;
 
             if (!parent) {
-                //Node is root
+                //Node is the root
                 root = replacement;
             }
             else {
@@ -236,7 +202,6 @@ public:
                 else parent->right = replacement;
             }
         }
-
         //Free the memory
         delete current;
     }
@@ -263,7 +228,7 @@ public:
     //Is the size is 0 then it is empty
     bool isEmpty() const { return _size == 0; }
 
-    //Remove all elements of the map and free memory
+    //Remove all elements of the map
     void clear() 
     {
         clearHelper(root);

@@ -43,7 +43,6 @@ int main() {
 	else {
 		std::cout << "Key 4 not found!" << std::endl;
 	};
-
 	std::cout << std::endl;
 
 	//Retrieving keys from value (not efficient)
@@ -60,7 +59,6 @@ int main() {
 	else {
 		std::cout << "value 'four' not found!" << std::endl;
 	};
-
 	std::cout << std::endl;
 
 	//Display key set
