@@ -19,7 +19,7 @@ This is an example visual of a BST:
 Note the 7s position because it is greater than the 5 but less than the 9. 
 <br><br>
 <strong>Adding:</strong>
-If we want to append the number 4, we traverse the binary tree while comparing keys. The most common way to traversing a binary tree is a DFS in-order traveral. The process looks like: 4 is less than the 5 (root) so we move to the left branch. Then the 4 is greater than the 2 so we move to the right sub-branch, and its right child is empty so that becomes 4. 
+If we want to append the number 4, we traverse the binary tree by comparing keys. The most common ways of traversing a binary tree are an in-order traveral or a direct traversal till we reach an empty child node. These processes approximately look like: 4 is less than the 5 (root) so we move to the left branch. Then the 4 is greater than the 2 so we move to the right sub-branch, and its right child is non existant so that becomes 4. 
 
            5
          /   \
@@ -40,11 +40,11 @@ Adding a few more nodes for demonstration yields:
 
 <strong>Searching</strong>: 
 <br>
-Searching simply requires a traversal of the binary tree, which is one of ths strenghts and purposes of a binary tree because it is so efficient. There are many ways to traverse a binary tree such as a DFS, which includes an in-order, pre-order and post-order traveral, or an iterative / non recursive approach. In my implementation I used a binary search which is the most efficient as it leverages the comparisons between the keys to trace a direct path to the desired node. Suppose we use the tree from above and want to search for the value at key 4. The path that the search would take is: 
+The binary search tree data structure is optimized for this feature, hence the name. Searching simply requires a traversal of the binary tree, which is the primary stength and purpose of even using of a binary tree. There are many ways to traverse a binary tree such as a DFS, which includes in-order, pre-order and post-order traversals, or an iterative / non recursive approach. In my implementation I used a binary search which is the most efficient as it leverages the comparisons between the keys to trace a direct path to the desired node (hence the name again). Suppose we use the tree from above and want to search for the value at key 4. The path that the search would take is: 
 
 ```5, 2, 4```
 
-Because we can recursively halve branches based on the comparisons (< or >) resulting in an O(log(n)) time complexity.
+Because we can recursively halve branches based on the comparisons (< or >) and the nature of a BST, it results in an O(log(n)) time complexity.
 
 <strong>Removing</strong>:
 
